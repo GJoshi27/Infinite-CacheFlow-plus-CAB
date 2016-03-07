@@ -11,8 +11,8 @@ http://www.cs.princeton.edu/~nkatta/papers/cacheflow14.pdf
 https://engineering.nyu.edu/highspeed/sites/engineering.nyu.edu.highspeed/files/uploads/papers/hotsdn15-cab.pdf
 
 ## Installation/Compilation
--[It uses c++ boost library]
--[Install BOOST of version >= 1_55]http://www.boost.org/
+- [It uses c++ boost library]
+- [Install BOOST of version >= 1_55]http://www.boost.org/
 
 
 
