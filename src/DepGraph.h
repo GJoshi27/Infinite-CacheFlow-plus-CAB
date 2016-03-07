@@ -5,8 +5,8 @@
 #include "Node.h"
 class DepGraph{
 	public:
-		node * root;
-		std::vector<node*> Nodes;
+		Node * root;
+		std::vector<Node*> Nodes;
 		Rule_List * rList;
 		uint32_t thres_soft;
 		uint32_t thres_hard;

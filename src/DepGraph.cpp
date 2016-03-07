@@ -6,7 +6,7 @@ DepGraph::DepGraph() {
 }
 
 DepGraph::DepGraph(Rule_List & rL) {
-	root = new node(0); /* full address space for root node Root node marked as
+	root = new Node(0); /* full address space for root node Root node marked as
 			       node with id as 0 */
 	printf("Creating Dependency Graph \n");  
 	uint32_t i=0; 
@@ -14,7 +14,7 @@ DepGraph::DepGraph(Rule_List & rL) {
 	uint32_t sz;
 	for (i = 0; i <= rL.list.size(); i++){
 		/*  Nodes[0] is dummy and may be later used as root */
-		node *tmp=new node(i);
+		Node *tmp=new Node(i);
 		Nodes.insert(Nodes.end(),tmp);
 	}
 
