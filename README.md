@@ -13,6 +13,8 @@ https://engineering.nyu.edu/highspeed/sites/engineering.nyu.edu.highspeed/files/
 ## Installation/Compilation
 - [It uses c++ boost library]
 - [Install BOOST of version >= 1_55]http://www.boost.org/
+- [It uses cmake for the compilation]
+- For more details on cmake follow: https://cmake.org/cmake-tutorial/
 
 
 
