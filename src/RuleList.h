@@ -11,7 +11,6 @@ class rule_list
 public:
     std::vector<rule> list;
     std::unordered_map <uint32_t, std::vector<uint32_t> > dep_map;
-    std::vector<size_t> occupancy;
 
     rule_list();
     rule_list(std::string &);

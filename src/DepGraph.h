@@ -25,7 +25,6 @@ class DepGraph{
 		//bool isReachable(vector<uint32_t>,vector<uint32_t>)
 		bool isReachable(uint32_t,uint32_t);
 
-  private:
 };
 
 #endif
