@@ -6,17 +6,17 @@
 #include "Rule.hpp"
 #include <unordered_map>
 
-class rule_list
+class Rule_List
 {
-public:
-    std::vector<rule> list;
-    std::unordered_map <uint32_t, std::vector<uint32_t> > dep_map;
+	public:
+		std::vector<Rule> list;
+		std::unordered_map <uint32_t, std::vector<uint32_t> > dep_map;
 
-    rule_list();
-    rule_list(std::string &);
-    void obtain_dep();
+		Rule_List();
+		Rule_List(std::string &);
+		void obtain_dep();
 		void print_dep();
 		void sort_list();
-    void print(const std::string &);
+		void print(const std::string &);
 };
 #endif

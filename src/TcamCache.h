@@ -9,7 +9,7 @@ class Cache
 {
 
 	public:
-		std::vector<rule> entries;
+		std::vector<Rule> entries;
 		uint32_t size;
 		uint32_t AvailSpace;
 		uint32_t CacheHit;
@@ -19,7 +19,7 @@ class Cache
 
 		Cache(uint32_t,uint32_t);
 		int initCache(BucketSet &);
-		void installRules(const Bucket &,const rule_list &);
+		void installRules(const Bucket &,const Rule_List &);
 
 };
 #endif	

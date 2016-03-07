@@ -4,26 +4,26 @@
 #include "stdafx.h"
 #include "Address.hpp"
 
-class rule {
-  public:
-    prefix_addr hostpair[2];
-    range_addr portpair[2];
-    std::vector<uint32_t> protocol;
+class Rule {
+	public:
+		prefix_addr hostpair[2];
+		range_addr portpair[2];
+		std::vector<uint32_t> protocol;
 		uint32_t weight;
 		uint32_t priority;
-    uint32_t FwdAction;
-    bool hit;
+		uint32_t FwdAction;
+		bool hit;
 
-  public:
-    inline rule();
-    inline rule(const rule &);
-    inline rule(const std::string &);
-    inline bool operator==(const rule &) const;
-    inline bool operator<(const rule &) const;
-		inline bool dep_rule(const rule &) const; 
+	public:
+		inline Rule();
+		inline Rule(const Rule &);
+		inline Rule(const std::string &);
+		inline bool operator==(const Rule &) const;
+		inline bool operator<(const Rule &) const;
+		inline bool dep_rule(const Rule &) const; 
 		inline bool packet_hit(const addr_5tup &) const; 
-    inline std::string get_str() const;
-    inline void print() const;
+		inline std::string get_str() const;
+		inline void print() const;
 };
 
 /*  For sorting based on priority */                                                             
@@ -31,7 +31,7 @@ class rule {
 /*  
 struct less_than_key                                                            
 {                                                                               
-				inline bool operator() (const rule& lhs, const rule& rhs)           
+				inline bool operator() (const Rule& lhs, const Rule& rhs)           
 				{                                                                       
 								return (lhs.priority < rhs.priority);                           
 				}                                                                       
@@ -40,21 +40,21 @@ struct less_than_key
 using std::pair;
 using std::endl;
 
-/* ----------------------------- rule----------------------------------
+/* ----------------------------- Rule----------------------------------
  * brief:
- * bucket_rules: two dim are prefix address, the other two are range address
+ * bucket_Rules: two dim are prefix address, the other two are range address
  */
 
 /* constructors
  *
  * options:
  * 	()			default
- * 	(const rule &)	copy function
+ * 	(const Rule &)	copy function
  * 	(const string &)	generate from a string "#srcpref/mask \t dstpref/mask \t ..."
  */
-inline rule::rule(){} 
+inline Rule::Rule(){} 
 
-inline rule::rule(const rule & ru) {                                      
+inline Rule::Rule(const Rule & ru) {                                      
     hostpair[0] = ru.hostpair[0];                                               
     hostpair[1] = ru.hostpair[1];                                               
     portpair[0] = ru.portpair[0];                                               
@@ -66,10 +66,10 @@ inline rule::rule(const rule & ru) {
     hit = ru.hit;                                                               
 }    
 
-inline rule::rule(const string & rule_str) {                 
+inline Rule::Rule(const string & Rule_str) {                 
     vector<string> temp;                                                        
-    boost::split(temp, rule_str, boost::is_any_of("\t")); //spliting tab separated values
-    //printf("Inside rule \n");                                               
+    boost::split(temp, Rule_str, boost::is_any_of("\t")); //spliting tab separated values
+    //printf("Inside Rule \n");                                               
     temp[0].erase(0,1); //Why this is there Remove 0 till 1st not 1st. I think because 0 position as @
     hostpair[0] = prefix_addr(temp[0]);  // For changing ip and mask into a single entity using AND operation
     hostpair[1] = prefix_addr(temp[1]);                                           
@@ -85,7 +85,7 @@ inline rule::rule(const string & rule_str) {
     hit = false;                                                                
 }     
 
-inline bool rule::operator==(const rule & rhs) const {
+inline bool Rule::operator==(const Rule & rhs) const {
     if (!(hostpair[0] == rhs.hostpair[0]))
         return false;
     if (!(hostpair[1] == rhs.hostpair[1]))
@@ -96,14 +96,14 @@ inline bool rule::operator==(const rule & rhs) const {
         return false;
     return true;
 }
-inline bool rule::operator<(const rule &rhs) const{
+inline bool Rule::operator<(const Rule &rhs) const{
 								return (priority < rhs.priority);                           
 }
 
 /* member fuctions
  */
 
-inline bool rule::dep_rule(const rule & rl) const { // check whether a rule is directly dependent
+inline bool Rule::dep_rule(const Rule & rl) const { // check whether a Rule is directly dependent
 				if (!hostpair[0].match(rl.hostpair[0])){                                    
 								//  printf("1 hostpair not matched\n");                               
 								return false;                                                           
@@ -129,11 +129,11 @@ inline bool rule::dep_rule(const rule & rl) const { // check whether a rule is d
 /* debug & print function
  */
 
-inline void rule::print() const {
+inline void Rule::print() const {
     cout<<get_str()<<endl;
 }
 
-inline string rule::get_str() const {
+inline string Rule::get_str() const {
     stringstream ss;
     ss<<hostpair[0].get_str()<<"\t";
     ss<<hostpair[1].get_str()<<"\t";
@@ -154,8 +154,8 @@ inline string rule::get_str() const {
     return ss.str();
 }
 
-inline bool rule::packet_hit(const addr_5tup & packet) const {
- // check whehter a rule is hit.
+inline bool Rule::packet_hit(const addr_5tup & packet) const {
+ // check whehter a Rule is hit.
     if (!hostpair[0].hit(packet.addrs[0]))                                      
         return false;                                                           
     if (!hostpair[1].hit(packet.addrs[1]))                                      

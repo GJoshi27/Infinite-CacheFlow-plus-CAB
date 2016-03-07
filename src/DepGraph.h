@@ -1,28 +1,20 @@
 #ifndef DEPGRAPH_H
 #define DEPGRAPH_H
 
-#include "Rule.hpp"
 #include "RuleList.h"
 #include "Node.h"
-#include <cmath>
-#include <set>
-#include <deque>
-#include <list>
 class DepGraph{
-  public:
-    node * root;
+	public:
+		node * root;
 		std::vector<node*> Nodes;
-		rule_list * rList;
-    uint32_t thres_soft;
-    uint32_t thres_hard;
-    uint32_t total_rules;
+		Rule_List * rList;
+		uint32_t thres_soft;
+		uint32_t thres_hard;
+		uint32_t total_rules;
 
-  public:
+	public:
 		DepGraph();
-    DepGraph(rule_list &); //Constructor
-    ~DepGraph(); //Destructor
-		void delNode(node *);
-		//bool isReachable(vector<uint32_t>,vector<uint32_t>)
+		DepGraph(Rule_List &); //Constructor
 		bool isReachable(uint32_t,uint32_t);
 
 };

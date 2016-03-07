@@ -10,24 +10,24 @@ using std::string;
  * 	()			default
  * 	(string &)		draw from file
  */
-rule_list::rule_list() {}
+Rule_List::Rule_List() {}
 
-rule_list::rule_list(string & filename){
+Rule_List::Rule_List(string & filename){
     ifstream file;
     file.open(filename.c_str());
 		if(!file){
 						std::cerr  <<  "Error: Unable to open file "   << filename   << std::endl;
 		exit(-1);
 		}
-    printf("Making rule_list \n");
+    printf("Making Rule_List \n");
     string sLine = "";
     getline(file, sLine);
     while (!file.eof()) {
 				//cout  <<  "Inside file check "  <<  endl;		
 				try{
-        rule sRule(sLine); // Converting Line from rules file into a structure sRule
+        Rule sRule(sLine); // Converting Line from rules file into a structure sRule
         sRule.print();          //Change Gaurav Printing rule stored 
-        list.push_back(sRule); //list variable of rule_list vector type
+        list.push_back(sRule); //list variable of Rule_List vector type
 				}catch( const std::exception& ex)
 				{
 
@@ -41,7 +41,7 @@ rule_list::rule_list(string & filename){
     }
     file.close();
 
-    printf("Gaurav List size: %lu \n",list.size());
+    printf("Gaurav List size: %u \n",list.size());
 
     /*Below removing redudant rules from the list if any from the file */
   
@@ -56,13 +56,13 @@ rule_list::rule_list(string & filename){
         }
     } 
 
-    printf("Gaurav after remvoing redundancy List size: %ld \n",list.size());
+    printf("Gaurav after remvoing redundancy List size: %u \n",list.size());
 }
 
 /* member func
  */
 
-void rule_list::obtain_dep() { // obtain the dependency map                     
+void Rule_List::obtain_dep() { // obtain the dependency map                     
     for(uint32_t idx = 0; idx < list.size(); ++idx) {                           
         vector <uint32_t> dep_rules;                                            
         //printf("\nouter loop\n");                                             
@@ -81,10 +81,10 @@ void rule_list::obtain_dep() { // obtain the dependency map
 /*
  * debug and print
  */
-void rule_list::print(const string & filename) {
+void Rule_List::print(const string & filename) {
     ofstream file;
     file.open(filename.c_str());
-    for (vector<rule>::iterator iter = list.begin(); iter != list.end(); iter++) {
+    for (vector<Rule>::iterator iter = list.begin(); iter != list.end(); iter++) {
 				cout  <<  iter->get_str()  <<  endl;		
         file<<iter->get_str()<<endl;
     }
@@ -93,7 +93,7 @@ void rule_list::print(const string & filename) {
 
 
 /*  Function for printing Dependency map matrix */                              
-void rule_list::print_dep() {                                                   
+void Rule_List::print_dep() {                                                   
         cout   <<   "Printing Dependency matrix "   <<  endl;                   
         for ( uint32_t i = 0; i < dep_map.size(); i++ )                         
         {       
@@ -106,7 +106,7 @@ void rule_list::print_dep() {
         }                                                                       
 }
 /*  Method for Sorting Rule List based on priority */
-void rule_list::sort_list(){
+void Rule_List::sort_list(){
 				printf("Inside sort list function \n");
 				//std::sort(list.begin(),list.end(),less_than_key());
 				std::sort(list.begin(),list.end());

@@ -10,7 +10,7 @@ using namespace std;
 
 Cache::Cache(uint32_t sz,uint32_t bkts)
 {
-	entries=vector<rule>(sz);
+	entries=vector<Rule>(sz);
 	size=sz;
 	AvailSpace=sz;
 	CacheHit=0;
@@ -28,7 +28,7 @@ int Cache::initCache(BucketSet &bs)
 	for(uint32_t i=0;i<totalbkts;i++)
 	{
 		cout << "Bucket: " << i << endl;
-		rule tmp(bs.bckts[i].pattern);
+		Rule tmp(bs.bckts[i].pattern);
 		entries[i]=tmp;
 		entries[i].print();
 		bs.bckts[i].installInd='N';
@@ -38,7 +38,7 @@ int Cache::initCache(BucketSet &bs)
 
 }
 
-void Cache::installRules(const Bucket &bkt,const rule_list &rl)
+void Cache::installRules(const Bucket &bkt,const Rule_List &rl)
 {
 				cout  <<  "Installing rule in TCAM \n";
 				uint32_t sz=bkt.NoRules;
